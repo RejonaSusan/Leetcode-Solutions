@@ -15,38 +15,19 @@ class Solution {
             return true;
         }
 
-        ListNode slow = head;
-        ListNode fast = head;
-        ListNode mid = null;
-
-        while(fast.next != null && fast.next.next != null){
-            slow = slow.next;
-            fast = fast.next.next;
+        ListNode temp = head;
+        ArrayList<Integer> arr = new ArrayList<>();
+        while(temp != null){
+            arr.add(temp.val);
+            temp = temp.next;
         }
 
-        ListNode newHead = reverse(slow.next);
-        ListNode first = head;
-        ListNode second = newHead;
-
-        while(second != null){
-            if(first.val != second.val){
+        int n = arr.size();
+        for(int i = 0; i<n/2; i++){
+            if (!arr.get(i).equals(arr.get(n - 1 - i))) {
                 return false;
             }
-            first = first.next;
-            second = second.next;
         }
-
         return true;
-    }
-
-    public ListNode reverse(ListNode mid){
-        if(mid == null || mid.next == null){
-            return mid;
-        }
-        ListNode newhead = reverse(mid.next);
-        ListNode front  = mid.next;
-        front.next = mid;
-        mid.next = null;
-        return newhead;
-    }
+    }    
 }
