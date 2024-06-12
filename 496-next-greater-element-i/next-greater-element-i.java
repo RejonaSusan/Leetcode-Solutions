@@ -24,7 +24,6 @@ class Solution {
             arr[i] = ans.get(i);
         }
 
-        return ans.stream().mapToInt(Integer::intValue).toArray();
-
+        return arr;
     }
 }
