@@ -19,14 +19,11 @@ class Solution {
             st.pop();
             k--;
         }
-        
-        while(!st.isEmpty()){
-            s.append(st.pop());
-        }
 
-        s.reverse();
-        while (s.length() > 0 && s.charAt(0) == '0') {
-            s.deleteCharAt(0);
+        for (char c : st) {
+            if (c == '0' && s.length() == 0)
+                continue;
+            s.append(c);
         }
 
         return s.length() == 0 ? "0" : s.toString();
