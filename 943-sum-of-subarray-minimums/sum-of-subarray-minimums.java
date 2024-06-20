@@ -8,20 +8,13 @@ class Solution {
         Arrays.fill(left, -1);
         Arrays.fill(right, n);
 
-        for(int i =n-1; i>=0; i--){
+        for(int i = 0; i<n; i++){
             while(!st.isEmpty() && arr[st.peek()] > arr[i]){
-                left[st.pop()] = i;
+                int idx = st.pop();
+                right[idx] = i;
             }
-            st.push(i);
-        }
-
-        while(!st.isEmpty()){
-            st.pop();
-        }
-
-        for(int i =0; i<n; i++){
-            while(!st.isEmpty() && arr[st.peek()] >= arr[i]){
-                right[st.pop()] = i;
+            if(!st.isEmpty()){
+                left[i] = st.peek(); 
             }
             st.push(i);
         }
