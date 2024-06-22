@@ -1,19 +1,24 @@
 class Solution {
     public int numberOfSubstrings(String s) {
-        char[] nums = s.toCharArray();
-        int[] freq = new int[3];
-        int l=0, r=0, cnt=0, unq=0;
-        while(r < nums.length){
-            freq[nums[r] - 'a']++;
-            if(freq[nums[r] - 'a'] == 1) unq++;
-            while(unq == 3){
-                cnt += (nums.length - r);
-                freq[nums[l] - 'a']--;
-                if(freq[nums[l] - 'a'] == 0) unq--;
-                l++;
-            } 
-            r++;
+        int count = 0, left = 0, right = 0;
+        int[] hash = new int[3];
+        Arrays.fill(hash, -1);
+
+        while(right < s.length()) {
+            char ch = s.charAt(right);
+            int smallestIndex = Integer.MAX_VALUE;
+
+            hash[ch - 'a'] = right;
+
+            for(int index : hash) {
+                if(index < smallestIndex) smallestIndex = index;
+            }
+
+            if(smallestIndex != -1) count += (smallestIndex + 1);
+
+            right++;
         }
-        return cnt;
+
+        return count;
     }
 }
