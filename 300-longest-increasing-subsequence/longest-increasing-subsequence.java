@@ -2,30 +2,20 @@ class Solution {
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;
 
-        int dp[][] = new int[n][n+1];
+        int dp[][] = new int[n+1][n+1];
 
-        for(int r[] : dp){
-            Arrays.fill(r, -1);
+        for(int i = n-1; i>=0; i--){
+            for(int j = i-1; j>=-1; j--){
+                int notake = dp[i+1][j+1];
+                int take = 0;
+                if(j == -1 || nums[i] > nums[j]){
+                    take = 1 + dp[i+1][i+1];
+                }
+
+                dp[i][j+1] = Math.max(take, notake);
+            } 
         }
 
-        return ans(nums, 0, -1, dp);
-    }
-
-    public int ans(int arr[], int id, int prev, int dp[][]){
-        if(id == arr.length){
-            return 0;
-        }
-
-        if(dp[id][prev+1] != -1){
-            return dp[id][prev+1];
-        }
-
-        int notake = ans(arr, id+1, prev, dp);
-        int take = 0;
-        if(prev == - 1 || arr[id]>arr[prev]){
-            take = 1 + ans(arr, id+1, id, dp);
-        }
-
-        return dp[id][prev+1] = Math.max(take, notake);
+        return dp[0][0];
     }
 }
