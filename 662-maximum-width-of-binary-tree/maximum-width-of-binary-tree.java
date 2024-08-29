@@ -28,12 +28,11 @@ class Solution {
         while(!q.isEmpty()){
 
             int n = q.size();
-            int mini = q.peek().getValue();
 
             int first=0, last=0;
 
             for(int i = 0; i<n; i++){
-                int curr = q.peek().getValue() - mini;
+                int curr = q.peek().getValue();
 
                 TreeNode node = q.peek().getKey();
 
